@@ -43,7 +43,7 @@ function transform(arr) {
       cloneArr.splice(cloneArr[i], 2);
       i--;
     } else if (cloneArr[i] === '--discard-prev'){
-      if(changeArr[changeArr.length - 1]){
+      if(changeArr[0]){
         changeArr.pop();
         cloneArr.splice(cloneArr[i], 1);
         i--;
@@ -52,9 +52,13 @@ function transform(arr) {
         i--;
       }
     } else if (cloneArr[i] === '--double-next'){
-      changeArr.push(cloneArr[i + 1]);
-      changeArr.push(cloneArr[i + 1]);
-      cloneArr.splice(cloneArr[i], 1);
+      if(cloneArr[i + 1]){
+        changeArr.push(cloneArr[i + 1]);
+        changeArr.push(cloneArr[i + 1]);
+        cloneArr.splice(cloneArr[i], 1);
+      } else {
+        cloneArr.splice(cloneArr[i], 1);
+      }      
     } else if (cloneArr[i] === '--double-prev'){
       if(changeArr[0]){
         changeArr.push(changeArr[changeArr.length - 1]);
