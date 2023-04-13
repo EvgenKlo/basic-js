@@ -34,9 +34,39 @@ function transform(arr) {
     return simpleArr;
   }
   let changeArr = [];
-  for(let i = 0; i < arr.length; i++){
-    
+  let cloneArr = [];
+  cloneArr = cloneArr.concat(arr);
+  for(let i = 0; i < cloneArr.length; i++){
+    if(cloneArr[i] !== '--discard-next' && cloneArr[i] !== '--discard-prev' && cloneArr[i] !== '--double-next' && cloneArr[i] !== '--double-prev'){
+      changeArr.push(cloneArr[i]);
+    } else if (cloneArr[i] === '--discard-next'){
+      cloneArr.splice(cloneArr[i], 2);
+      i--;
+    } else if (cloneArr[i] === '--discard-prev'){
+      if(changeArr[changeArr.length - 1]){
+        changeArr.pop();
+        cloneArr.splice(cloneArr[i], 1);
+        i--;
+      } else {
+        cloneArr.splice(cloneArr[i], 1);
+        i--;
+      }
+    } else if (cloneArr[i] === '--double-next'){
+      changeArr.push(cloneArr[i + 1]);
+      changeArr.push(cloneArr[i + 1]);
+      cloneArr.splice(cloneArr[i], 1);
+    } else if (cloneArr[i] === '--double-prev'){
+      if(changeArr[0]){
+        changeArr.push(changeArr[changeArr.length - 1]);
+        cloneArr.splice(cloneArr[i], 1);
+        i--;
+      } else {
+        cloneArr.splice(cloneArr[i], 1);
+        i--;
+      }
+    }
   }
+  return changeArr;
   //throw new NotImplementedError('Not implemented');
   // remove line with error and write your code here
 }
