@@ -40,17 +40,19 @@ function transform(arr) {
     if(cloneArr[i] !== '--discard-next' && cloneArr[i] !== '--discard-prev' && cloneArr[i] !== '--double-next' && cloneArr[i] !== '--double-prev'){
       changeArr.push(cloneArr[i]);
     } else if (cloneArr[i] === '--discard-next'){
-      cloneArr.splice(cloneArr[i], 2);
-      i--;
+      delete cloneArr[i + 1];
+      i++;
     } else if (cloneArr[i] === '--discard-prev'){
-      if(changeArr[0]){
-        changeArr.pop();
-        cloneArr.splice(cloneArr[i], 1);
-        i--;
-      } else {
-        cloneArr.splice(cloneArr[i], 1);
-        i--;
-      }
+      if(changeArr[0] && (cloneArr[i - 1] !== undefined)){
+        if(changeArr[0]){
+          changeArr.pop();
+          cloneArr.splice(cloneArr[i], 1);
+          i--;
+        } else {
+          cloneArr.splice(cloneArr[i], 1);
+          i--;
+        }
+      }     
     } else if (cloneArr[i] === '--double-next'){
       if(cloneArr[i + 1]){
         changeArr.push(cloneArr[i + 1]);
@@ -60,7 +62,7 @@ function transform(arr) {
         cloneArr.splice(cloneArr[i], 1);
       }      
     } else if (cloneArr[i] === '--double-prev'){
-      if(changeArr[0]){
+      if(changeArr[0] && (cloneArr[i - 1] !== undefined)){
         changeArr.push(changeArr[changeArr.length - 1]);
         cloneArr.splice(cloneArr[i], 1);
         i--;
