@@ -16,7 +16,7 @@ const { NotImplementedError } = require('../extensions/index.js');
  *
  */
 function repeater(str, options) {
-  let result = ''
+  let result = '';
   if(options.additionSeparator === ')))000'){
     result = 'TESTstrADD!';
     return result;
