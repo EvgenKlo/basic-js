@@ -24,13 +24,13 @@ const chainMaker = {
     // remove line with error and write your code here
   },
   addLink(value) {
-    /* if(this.chain.length === 0){
+    if(this.chain.length === 0){
       this.chain += `( ${value} )`
     } else {
       this.chain += `~~( ${value} )`
     }
-    return this.chain; */
-    throw new NotImplementedError('Not implemented');
+    return this.chain;
+    //throw new NotImplementedError('Not implemented');
     // remove line with error and write your code here
   },
   removeLink(position) {
